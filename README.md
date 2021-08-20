@@ -1,2 +1,2 @@
-# maga_mart
+# MagaMart System
 Project by BlackHawks Corporation Limited
