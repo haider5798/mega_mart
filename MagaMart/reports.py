@@ -212,7 +212,7 @@ class Reports:
         cur.execute('SELECT * FROM `salesreport`')
         rows = cur.fetchall()
         if rows:
-            with open(f'{self.date_time.get()}.csv', 'w') as f:
+            with open(f'static/reports/{self.date_time.get()}.csv', 'w') as f:
                 for column in column_name:
                     f.write(column[0]+',')
                 f.write('\n')

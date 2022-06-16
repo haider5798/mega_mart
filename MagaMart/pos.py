@@ -222,7 +222,7 @@ class Pos:
     def print(self):
         if self.bill_no.get() != '':
             q = self.textbox.get('1.0', 'end-1c')
-            with open(f'{self.bill_no.get()}.txt', 'w') as f:
+            with open(f'static/bills/{self.bill_no.get()}.txt', 'w') as f:
                 f.write(q)
             filename = tempfile.mktemp('.txt')
             open(filename, 'w').write(q)
@@ -281,10 +281,11 @@ class Pos:
             cur.execute(query)
             data = cur.fetchone()
             con.commit()
+            print(data)
         except Exception as Error:
-            data = (None,)
+            data = None
             print(Error)
-        if data is not None:
+        if data:
             self.product_name.set(data[0])
             self.ava_quantity.set(data[1])
             self.unit_price.set(data[2])

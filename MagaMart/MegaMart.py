@@ -8,8 +8,9 @@ from check import Check
 
 def process_exists(process_name):
     call = 'TASKLIST', '/FI', 'imagename eq %s' % process_name
-    output = subprocess.check_output(call).decode()  # use built in check_output right away
-    last_line = output.strip().split('\r\n')[-1]   # check in last line for process name
+    process = subprocess.Popen(call, shell=True, stdout=subprocess.PIPE)
+    output, err = process.communicate()  # use built in check_output right away
+    last_line = str(output).strip().split('\r\n')[-1]   # check in last line for process name
     return last_line.lower().startswith(process_name.lower())  # because Fail message could be translated
 
 
@@ -117,7 +118,7 @@ def on_destroy(event):
 
 
 window = Tk()
-window.title('MegaMart Automation')
+window.title('MegaMart Management')
 window.geometry('1080x624+143+60')
 window.resizable(False, False)
 # -----------------------------Menu------------------------------------#
